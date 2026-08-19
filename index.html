@@ -413,10 +413,23 @@ const BASE_URL = "https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPOSITORY/";
 
 // 2) Edit names, roles, descriptions, images and social URLs here.
 //    This is the ONLY place you should need to change content.
-// Each person has a flexible `links` array (not just LinkedIn/GitHub/Instagram),
-// so you can mix in things like LeetCode, Codolio, or email per person.
+// Each entry has a flexible `links` array (not just LinkedIn/GitHub/Instagram),
+// so you can mix in things like Website, LeetCode, Codolio, or email per entry.
 // `icon` is any Font Awesome class string: https://fontawesome.com/icons
 const profiles = [
+  // -- Brand / company card, shown first, before all individual profiles --
+  {
+    id: "intervista",
+    name: "Intervista AI",
+    role: "www.intervistaai.com",
+    description: "Presented by Intervista AI. Follow us for updates, and connect with the team members below.",
+    image: "static/images/0.png",
+    links: [
+      { label: "Website",   handle: "intervistaai.com",  url: "https://www.intervistaai.com", icon: "fa-solid fa-globe" },
+      { label: "LinkedIn",  handle: "intervistaai",      url: "https://www.linkedin.com/company/intervistaai/", icon: "fa-brands fa-linkedin" },
+      { label: "Instagram", handle: "intervistaai",      url: "https://www.instagram.com/intervistaai?igsh=MXdlOHpnZ2txc3hhOQ==", icon: "fa-brands fa-instagram" }
+    ]
+  },
   {
     id: "person1",
     name: "Pranav Sahu",
@@ -555,7 +568,7 @@ profiles.forEach((p, i) => {
 
   mainEl.appendChild(section);
 
-  /* ---- generate this person's QR code (client-side, no backend) ---- */
+  /* ---- generate this entry's QR code (client-side, no backend) ---- */
   // eslint-disable-next-line no-new
   new QRCode(document.getElementById("qr-" + p.id), {
     text: profileUrl,
@@ -598,9 +611,9 @@ dots.forEach(dot => {
 
 /* ================================================================
    HASH ROUTING
-   Supports index.html#person1 / #person2 / #person3 — this is what
-   each QR code encodes, so scanning a code jumps straight to that
-   person's card, whether the page is freshly loaded or already open.
+   Supports index.html#intervista / #person1 / #person2 / etc — this
+   is what each QR code encodes, so scanning a code jumps straight to
+   that entry's card, whether the page is freshly loaded or already open.
    ================================================================ */
 function scrollToHash(){
   const id = window.location.hash.replace("#", "");
